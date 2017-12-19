@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.litesuits.orm.LiteOrm;
+import com.major.processdata.dao.Dao;
+import com.major.processdata.dao.DaoProxy;
+import com.major.processdata.entity.ElegantBean;
 
 import java.util.List;
 
@@ -18,20 +20,20 @@ public class OperationService extends Service {
 
     class Operation extends OperationBinder.Stub {
 
-        private LiteOrm mLiteOrm;
+        private Dao mDao;
 
         public Operation() {
-            mLiteOrm = LiteOrm.newSingleInstance(OperationService.this.getApplicationContext(), MainActivity.ELEGANT_DB);
+            mDao = new DaoProxy(getApplicationContext(), MainActivity.ELEGANT_DB);
         }
 
         @Override
         public long saveData(ElegantBean bean) throws RemoteException {
-            return mLiteOrm.insert(bean);
+            return mDao.insert(bean);
         }
 
         @Override
         public List<ElegantBean> getData() throws RemoteException {
-            return mLiteOrm.query(ElegantBean.class);
+            return mDao.query(ElegantBean.class);
         }
     }
 }

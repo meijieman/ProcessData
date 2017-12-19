@@ -1,6 +1,6 @@
 // OperationBinder.aidl
 package com.major.processdata;
-import com.major.processdata.ElegantBean;
+import com.major.processdata.entity.ElegantBean;
 
 interface OperationBinder {
 

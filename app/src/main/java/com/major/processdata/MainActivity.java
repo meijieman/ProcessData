@@ -9,18 +9,19 @@ import android.os.RemoteException;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
-import com.litesuits.orm.LiteOrm;
+import com.major.processdata.dao.Dao;
+import com.major.processdata.dao.DaoProxy;
+import com.major.processdata.entity.ElegantBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-
     public static final String ELEGANT_DB = "elegant.db";
 
     private OperationBinder mBinder;
-    private LiteOrm mLiteOrm;
+    private Dao mDao;
 
     private ServiceConnection mConn = new ServiceConnection(){
         @Override
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         bindService(new Intent(this, OperationService.class), mConn, BIND_AUTO_CREATE);
 
-        mLiteOrm = LiteOrm.newSingleInstance(getApplicationContext(), ELEGANT_DB);
+        mDao = new DaoProxy(getApplicationContext(), ELEGANT_DB);
     }
 
     @Override
@@ -58,13 +59,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View v){
-        switch(v.getId()) {
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.btn_get_data_service: {
-                try{
+                try {
                     List<ElegantBean> data = mBinder.getData();
                     LogUtil.i("get data service " + data);
-                } catch(RemoteException e){
+                } catch (RemoteException e) {
                     e.printStackTrace();
                 }
                 break;
@@ -73,16 +74,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ElegantBean bean = new ElegantBean();
                 bean.setCount(222);
                 bean.setNick("someone");
-                try{
+                try {
                     long l = mBinder.saveData(bean);
                     LogUtil.i("save data service insert " + l);
-                } catch(RemoteException e){
+                } catch (RemoteException e) {
                     e.printStackTrace();
                 }
                 break;
             }
             case R.id.btn_get_data: {
-                ArrayList<ElegantBean> query = mLiteOrm.query(ElegantBean.class);
+                ArrayList<ElegantBean> query = mDao.query(ElegantBean.class);
                 LogUtil.i("get data " + query);
                 break;
             }
@@ -90,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ElegantBean bean = new ElegantBean();
                 bean.setCount(111);
                 bean.setNick("whocare");
-                long insert = mLiteOrm.insert(bean);
+                long insert = mDao.insert(bean);
                 LogUtil.i("save data insert " + insert);
                 break;
             }

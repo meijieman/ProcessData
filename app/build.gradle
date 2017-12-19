@@ -28,3 +28,26 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/lite-orm-1.9.2.jar')
 }
+
+// --------------------------------------------------------------------
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
+    }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+dependencies {
+    compile 'org.greenrobot:greendao:3.2.2'
+}
+
+greendao{
+    targetGenDir 'src/main/java'
+    schemaVersion 1
+    daoPackage 'com.major.processdata.dao.gen'
+}
