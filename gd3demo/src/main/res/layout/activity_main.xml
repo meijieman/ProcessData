@@ -16,20 +16,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="insert"/>
+
     <Button
         android:id="@+id/btn_del"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="del"/>
+
     <Button
         android:id="@+id/btn_modify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="modify"/>
+
     <Button
         android:id="@+id/btn_query"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="query"/>
+
+    <TextView android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:text="--------------------"/>
+
+    <Button
+        android:id="@+id/btn_insert_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="insert_1"/>
+
+    <Button
+        android:id="@+id/btn_query_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="query_1"/>
+
+    <Button
+        android:id="@+id/btn_del_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="del_1"/>
 
 </LinearLayout>

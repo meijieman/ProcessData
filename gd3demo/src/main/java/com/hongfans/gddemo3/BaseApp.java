@@ -2,11 +2,11 @@ package com.hongfans.gddemo3;
 
 import android.app.Application;
 
-
-import com.hongfans.gddemo3.dao.DaoMaster;
-import com.hongfans.gddemo3.dao.DaoSession;
+import com.hongfans.gddemo3.gen.DaoMaster;
+import com.hongfans.gddemo3.gen.DaoSession;
 
 import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.database.DatabaseOpenHelper;
 
 /**
  * Created by Administrator on 2017/3/3.
@@ -20,7 +20,11 @@ public class BaseApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, ENCRYPTED ? "notes-db_encrypted" : "notes-db");
+        DatabaseOpenHelper helper;
+
+        helper= new DaoMaster.DevOpenHelper(this, ENCRYPTED ? "notes-db_encrypted" : "notes-db");
+//        helper = new MyOpenHelper(this, ENCRYPTED ? "notes-db_encrypted" : "notes-db");
+
         Database db = ENCRYPTED ? helper.getEncryptedWritableDb("super-secret") : helper.getWritableDb();
         mDaoSession = new DaoMaster(db).newSession();
     }
