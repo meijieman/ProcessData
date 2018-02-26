@@ -1,1 +1,1 @@
-include ':app', ':contentproviderdemo', ':gd3demo'
+include ':app', ':contentproviderdemo', ':gd3demo', ':dbflow'
