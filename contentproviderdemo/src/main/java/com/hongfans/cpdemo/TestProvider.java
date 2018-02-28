@@ -38,7 +38,6 @@ public class TestProvider extends ContentProvider {
     public boolean onCreate() {
         mDBHelper = new DBHelper(getContext());
 
-
         return true;
     }
 
