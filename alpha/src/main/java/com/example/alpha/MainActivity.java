@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -13,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.hongfans.common.log.SL;
-import com.litesuits.orm.LiteOrm;
 
 import java.util.ArrayList;
 

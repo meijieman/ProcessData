@@ -6,6 +6,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 
+import com.hongfans.common.log.SL;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,8 +37,11 @@ public class DBProxyImpl implements DBProxy {
                 T t = getObject(clazz, cursor);
                 list.add(t);
             }
-        } catch (InstantiationException | IllegalAccessException e) {
+        } catch (InstantiationException e) {
             e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+            SL.i(clazz.getName() + " 没有默认的构造函数");
         }
 
         return list;
@@ -44,13 +49,11 @@ public class DBProxyImpl implements DBProxy {
 
     // 根据一条记录生成一个对象，可以优化为注解
     private <T> T getObject(Class<T> clazz, Cursor cursor) throws IllegalAccessException, InstantiationException {
-        Object obj = clazz.newInstance();
+        T t = clazz.newInstance();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            field.set(obj, cursor.getColumnIndex(field.getName()));
+            field.set(t, cursor.getColumnIndex(field.getName()));
         }
-
-        T t = (T) obj;
         return t;
     }
 
@@ -93,6 +96,13 @@ public class DBProxyImpl implements DBProxy {
                         cv.put(field.getName(), (int) o);
                     } else {
                         // FIXME: 2018/2/28 定义各种类型
+                        if (clazz.equals(Integer.class)) {
+
+                        } else {
+
+                        }
+
+
                     }
                 }
             }
