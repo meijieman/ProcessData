@@ -10,3 +10,6 @@ GreenDao 则不会
 
 
 
+
+GreenDao 与 ContentProvider 的结合
+https://stackoverflow.com/questions/26073144/using-green-dao-with-content-provider?answertab=active#tab-top
